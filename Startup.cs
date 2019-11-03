@@ -35,12 +35,21 @@ namespace Locar
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlite(
-                    Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<LocarDbContext>(options =>
+                options.UseMySql(
+                    Configuration.GetConnectionString("myConn")));
+
+            //services.AddIdentity<Usuario, NivelAcesso>().AddEntityFrameworkStores<RegistroDbContext>();      
+            
             services.AddDefaultIdentity<IdentityUser>()
                 .AddDefaultUI(UIFramework.Bootstrap4)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+                .AddEntityFrameworkStores<LocarDbContext>();
+
+
+             //Por causa das DI que foram feitas no controller Home
+            //services.AddScoped<SignInManager<Usuario>,SignInManager<Usuario>>();
+            //services.AddScoped<UserManager<Usuario>,UserManager<Usuario>>();
+            //services.AddScoped<RoleManager<NivelAcesso>, RoleManager<NivelAcesso>>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
