@@ -13,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using Locar.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Locar.Models;
 
 namespace Locar
 {
@@ -35,18 +36,35 @@ namespace Locar
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            //configurar os cookies da aplicação
+            services.ConfigureApplicationCookie(options => 
+            {
+                options.Cookie.HttpOnly = true;
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(50); //Para definir o tempo até o cookie expirar
+                options.LoginPath = "/Usuarios/Login";
+                options.SlidingExpiration = true; //Depois que o tempo esgota, os cookies são renovados
+            });
+
             services.AddDbContext<LocarDbContext>(options =>
                 options.UseMySql(
-                    Configuration.GetConnectionString("myConn")));
-
-            //services.AddIdentity<Usuario, NivelAcesso>().AddEntityFrameworkStores<RegistroDbContext>();      
+                    Configuration.GetConnectionString("myConn")));  
             
-            services.AddDefaultIdentity<IdentityUser>()
+            services.AddIdentity<Usuario, NivelAcesso>()
                 .AddDefaultUI(UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<LocarDbContext>();
 
+            services.Configure<IdentityOptions>(options => 
+            {
+                //Nesta etapa configuro preferências de como a senha precisa ser, do identity.
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequiredLength = 6;
+                options.Password.RequiredUniqueChars = 1;
+            });
 
-             //Por causa das DI que foram feitas no controller Home
+            //Por causa das DI que foram feitas no controller Home
             //services.AddScoped<SignInManager<Usuario>,SignInManager<Usuario>>();
             //services.AddScoped<UserManager<Usuario>,UserManager<Usuario>>();
             //services.AddScoped<RoleManager<NivelAcesso>, RoleManager<NivelAcesso>>();

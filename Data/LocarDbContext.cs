@@ -5,7 +5,7 @@ namespace Locar.Data
 {
     public class LocarDbContext : IdentityDbContext
     {
-
+        
 
         public LocarDbContext(DbContextOptions<LocarDbContext> options)
             : base(options)
