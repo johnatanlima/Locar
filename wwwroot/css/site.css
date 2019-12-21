@@ -88,5 +88,26 @@ body {
   padding-bottom: 20px;
 }
 
+.item1{
+  flex: 1;
+}
 
+.item2{
+  padding: 7px;
+  text-align: center;
+  border: yellow 1px solid;
+  flex:1;
+}
+
+flex-flow {
+  flex-wrap: wrap;
+}
+
+.space-between{
+  justify-content: space-between;
+}
+
+.logo{
+  margin-right: 3px;
+}
 
