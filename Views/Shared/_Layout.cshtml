@@ -26,36 +26,22 @@
 <body>
 <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-info">
-        <div class="container">
-            <a class="navbar-brand text-white" asp-controller="Usuarios" asp-action="Index"> <i class="fas fa-car fa-lg"></i> Aluguel de carros </a>
+        <div class="container bg-success flex space-between">
+            <div class="bg-warning logo">
+                <a class="navbar-brand text-white" asp-controller="Usuarios" asp-action="Index"> <i class="fas fa-car fa-lg"></i> Aluguel de carros </a>
+            </div>
+
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
+                    <span class="navbar-toggler-icon"></span>
             </button>
-
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="shadow navbar-nav mr-auto ">
-                    
-                    <li class="nav-item">
-                       <a class="nav-link navbar-text text-white active" asp-action="Registro" asp-controller="Usuarios"> Registro</a>
-                    </li>
-                    
-                    <li class="nav-item">
-                        <a class="nav-link navbar-text text-white" asp-action="Entrar" asp-controller="Usuarios"> Entrar</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link navbar-text text-white" asp-action="Index" asp-controller="Carros"> Carros</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link navbar-text text-white" asp-action="Index" asp-controller="NiveisAcesso"> Níveis de Acesso</a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link navbar-text text-white" asp-action="Index" asp-controller="Contas"> Saldo</a>
-                    </li>
-
-                </ul>
+            
+            <div class="collapse navbar-collapse bg-danger flex-flow space-between" id="navbarSupportedContent">
+                <a class="nav-link navbar-text text-white active item2" asp-action="Registro" asp-controller="Usuarios"> Registro</a>
+                        <a class="nav-link navbar-text text-white item2" asp-action="Entrar" asp-controller="Usuarios"> Entrar</a>
+                        <a class="nav-link navbar-text text-white item2" asp-action="Index" asp-controller="NiveisAcesso"> Níveis de Acesso</a>
+                        <a class="nav-link navbar-text text-white item2" asp-action="Index" asp-controller="Carros"> Carros</a>
+                        <a class="nav-link navbar-text text-white item2" asp-action="Index" asp-controller="NiveisAcesso"> Níveis de Acesso</a>
+                        <a class="nav-link navbar-text text-white item2" asp-action="Index" asp-controller="Contas"> Saldo</a>
                 
                 <partial name="_LoginPartial" />
             
