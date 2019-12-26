@@ -15,6 +15,7 @@ namespace Locar.Models
 
         public ICollection<Aluguel> Alugueis {get; set;}
 
+        public Conta ContaVirtual {get;set;}
         
     }
 }

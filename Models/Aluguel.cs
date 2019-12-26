@@ -13,6 +13,6 @@ namespace Locar.Models
     public string Inicio { get; set; }
 
     public string Fim { get; set; }
-    public int PrecoDiaria { get; set; }
+    public int PrecoTotal { get; set; }
 }
 }
