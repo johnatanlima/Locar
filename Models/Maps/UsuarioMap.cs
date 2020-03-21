@@ -27,6 +27,6 @@ namespace Locar.Models.Maps
             builder.HasOne(u => u.ContaVirtual).WithOne(x => x.UsuarioVirtual);
 
 
-        }
+        } 
     }
 }
