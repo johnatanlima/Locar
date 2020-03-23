@@ -7,7 +7,7 @@ namespace Locar.Models
     public string UsuarioId { get; set; }
     public Usuario UsuarioVirtual { get; set; }
 
-    public string CarroId { get; set; }
+    public int CarroId { get; set; }
     public Carro CarroVirtual { get; set; }
 
     public string Inicio { get; set; }

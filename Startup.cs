@@ -10,6 +10,8 @@ using Locar.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Locar.Models;
+using Locar.AcessoDados.Repositorio;
+using Locar.AcessoDados.Interface;
 
 namespace Locar
 {
@@ -59,6 +61,8 @@ namespace Locar
                 options.Password.RequiredLength = 6;
                 options.Password.RequiredUniqueChars = 1;
             });
+
+            services.AddScoped<INivelAcesso, NivelAcessoRepositorio>();
 
             //Por causa das DI que foram feitas no controller Home
             //services.AddScoped<SignInManager<Usuario>,SignInManager<Usuario>>();
