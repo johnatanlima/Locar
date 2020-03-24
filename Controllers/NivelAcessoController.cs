@@ -92,7 +92,7 @@ namespace Locar.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(string id, [Bind("Permissao,Id,Name,NormalizedName,ConcurrencyStamp")] NivelAcesso nivelAcesso)
         {
-            _logger.LogInformation("Atualizando nivel de acesso informado...");
+            _logger.LogInformation("Atualizando nivel de acesso informado..."); 
 
             if (id != nivelAcesso.Id)
             {

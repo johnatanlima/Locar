@@ -1,47 +1,45 @@
 ﻿@model Locar.Models.NivelAcesso
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Alterar nivel de acesso" + Model.Name;
 }
 
-<h1>Edit</h1>
+<div class="border border-light rounded shadow col-md-8">
+    <div class="container">
 
-<h4>NivelAcesso</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Permissao" class="control-label"></label>
-                <input asp-for="Permissao" class="form-control" />
-                <span asp-validation-for="Permissao" class="text-danger"></span>
+        <h3 class="titulo"><i class="fas fa-user-lock fa-lg"></i> Atualizar nivel de Acesso @Model.Name</h3>
+        <hr />
+        <div class="row">
+            <div class="col-md-8">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                    <input type="hidden" asp-for="Id" />
+
+                    <div class="campos">
+                        <div class="form-group">
+                            <label asp-for="Name" class="control-label"></label>
+                            <input asp-for="Name" class="form-control form-control-lg" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="campos">
+                        <div class="form-group">
+                            <label asp-for="Permissao" class="control-label"></label>
+                            <input asp-for="Permissao" class="form-control form-control-lg" />
+                            <span asp-validation-for="Permissao" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group botoes">
+                        <input type="submit" value="Salvar" class="btn btn-outline-success btn-lg" /> &nbsp;
+                        <a asp-action="Index" class="btn btn-link btn-lg"> Voltar </a>
+                    </div>
+                </form>
             </div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="NormalizedName" class="control-label"></label>
-                <input asp-for="NormalizedName" class="form-control" />
-                <span asp-validation-for="NormalizedName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ConcurrencyStamp" class="control-label"></label>
-                <input asp-for="ConcurrencyStamp" class="form-control" />
-                <span asp-validation-for="ConcurrencyStamp" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {
