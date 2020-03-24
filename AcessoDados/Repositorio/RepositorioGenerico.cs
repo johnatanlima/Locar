@@ -86,7 +86,8 @@ namespace Locar.AcessoDados.Repositorio
         {
             try
             {
-                return await _context.Set<TEntity>().FindAsync(id);
+                return await _context.Set<TEntity>().FindAsync(id); //Pegar a instancia passada por seu id, 
+              
             }
             catch (Exception ex)
             {
