@@ -113,7 +113,6 @@ namespace Locar.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(string id)
         {
             await _nivelAcesso.Excluir(id);

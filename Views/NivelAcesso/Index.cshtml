@@ -12,7 +12,7 @@
        
         <h3 class="titulo">
             <i class="fas fa-user-lock fa-lg"></i> &nbsp; Níveis de acesso &nbsp;
-            <a asp-action="Create" class="btn btn-outline-secondary btn-lg" data-toggle="tooltip" data-placement="right" title="Novo nível de acesso"><i class="fas fas-plus-circle fa-lg"></i></a>
+            <a asp-action="Create" class="btn btn-outline-secondary btn-lg" data-toggle="tooltip" data-placement="right" title="Novo nível de acesso"><i class="fas fa-plus-circle fa-lg"></i></a>
         </h3>
 
         <table class="table table-striped table-hover">
@@ -31,23 +31,23 @@
             <tbody>
                 @foreach (var item in Model)
                 {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
+                       <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
 
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Permissao)
-                    </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Permissao)
+                        </td>
 
 
-                    <td>
-                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-primary" data-toggle="tooltip" data-placement="right" title="Atualizar nivel de acesso" ><i class="fas fa-edit"></i> </a> &nbsp;
-                        <a asp-action="Details" asp-route-id="@item.Id">Detalhes</a> |
-                        <a class="btn btn-outline-danger" data-toggle="tooltip" data-placement="top" title="Excluir nivel de aceso" onclick="ConfirmarExclusao('@item.Id', '@item.Name', '@controller')"><i class="fas fa-trash-alt"></i></a>
-                    </td>
-                </tr>
-                }
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-primary" data-toggle="tooltip" data-placement="right" title="Atualizar nivel de acesso" ><i class="fas fa-edit"></i> </a> &nbsp;
+                            @*<a asp-action="Details" asp-route-id="@item.Id">Detalhes</a> |*@
+                            <a class="btn btn-outline-danger" data-toggle="tooltip" data-placement="top" title="Excluir nivel de aceso" onclick="ConfirmarExclusao('@item.Id', '@item.Name', '@controller')"><i class="fas fa-trash-alt"></i></a>
+                        </td>
+                    </tr>
+                 }
             </tbody>
         </table>
     </div>
@@ -58,27 +58,33 @@
 @section Scripts{ 
     <script>
 
-        function ExibirModal() {
+        /*function ExibirModal() {
             $('[data-toggle="tooltip"]').tooltip();
-        }
+        }*/
+        $(function() {
+            $('[data-toggle="tooltip"]').tooltip();
+        })
+
 
         function ConfirmarExclusao(id, nome, controller) {
-            $("Nome").html(nome);
+            $(".Nome").html(nome);
 
             $(".modal").modal("show");
 
             $(".btnExcluir").on("click", function () {
-                var url = "/" + controller + "/Delele/";
+                var url = "/" + controller + "/Delete/";
+
+                console.log("Clique em excluir");
 
                 $.ajax({
-                    url: url,
                     method: "POST",
-                    data: { id: id },
-                    success: function (data) {
+                    url: url,
+                    data: {id:id },
+                    success: function(data){
                         alert("Registro Excluido");
 
                        // $(".modal").modal('hide');
-                        location.reload(true);
+                        location.reload();
                     }
                 });
             });            
