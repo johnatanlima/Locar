@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Locar.AcessoDados.Interface
 {
-    interface IUsuarioRepositorio : IRepositorioGenerico<Usuario>
+    public interface IUsuarioRepositorio : IRepositorioGenerico<Usuario>
     {
         Task<Usuario> PegarUsuarioLogado(ClaimsPrincipal usuario);
         Task<IdentityResult> SalvarUsuario(Usuario usuario, string senha);
@@ -16,6 +16,6 @@ namespace Locar.AcessoDados.Interface
         Task AtribuirNivelAcesso(Usuario usuario, string nivelAcesso);
         Task EfetuarLogin(Usuario usuario, bool lembrar);
         Task EfetuarLogout();
-        Task PegarUsuarioPorEmail(string email);
+        Task <Usuario> PegarUsuarioPorEmail(string email);
     }
 }
