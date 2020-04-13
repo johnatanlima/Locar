@@ -36,7 +36,7 @@
             </button>
             
             <div class="collapse navbar-collapse bg-danger flex-flow space-between" id="navbarSupportedContent">
-                <a class="nav-link navbar-text text-white active item2" asp-action="Registro" asp-controller="Usuarios"> Registro</a>
+                <a class="nav-link navbar-text text-white active item2" asp-action="Registrar" asp-controller="Usuario"> Registrar </a>
                 <a class="nav-link navbar-text text-white item2" asp-action="Entrar" asp-controller="Usuarios"> Entrar</a>
                 <a class="nav-link navbar-text text-white item2" asp-action="Index" asp-controller="NivelAcesso"> Níveis de Acesso</a>
                 <a class="nav-link navbar-text text-white item2" asp-action="Index" asp-controller="Carros"> Carros</a>
@@ -51,8 +51,8 @@
     </nav>
 </header>
     
-    <div class="container">
-        <partial name="_CookieConsentPartial" />
+    <div class="container conteudoPrincipal">
+        @*<partial name="_CookieConsentPartial" />*@
       
         <main role="main" class="pb-3">
             @RenderBody()

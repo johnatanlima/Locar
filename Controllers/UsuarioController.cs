@@ -12,14 +12,15 @@ namespace Locar.Controllers
     public class UsuarioController : Controller
     {
         private readonly IUsuarioRepositorio _usuarioRepositorio;
-        private readonly ILogger _logger;
+        private readonly ILogger<UsuarioController> _logger;
 
-        public UsuarioController(IUsuarioRepositorio usuarioRepositorio, ILogger logger)
+        public UsuarioController(IUsuarioRepositorio usuarioRepositorio, ILogger<UsuarioController> logger)
         {
             _usuarioRepositorio = usuarioRepositorio;
             _logger = logger;
         }
 
+        [HttpGet]
         public async Task<IActionResult> Registrar()
         {
             if (User.Identity.IsAuthenticated)
@@ -33,6 +34,7 @@ namespace Locar.Controllers
 
             return RedirectToAction("Index");
         }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Registrar(RegistroViewModel registro)
