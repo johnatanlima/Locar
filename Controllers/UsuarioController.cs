@@ -31,8 +31,8 @@ namespace Locar.Controllers
 
                 return View();
             }
-
-            return RedirectToAction("Index");
+           
+            return View("Registrar");
         }
 
         [HttpPost]
