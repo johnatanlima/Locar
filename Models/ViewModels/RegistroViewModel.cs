@@ -14,7 +14,7 @@ namespace Locar.Models.ViewModels
         public string Nome { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatorio")]
-        [StringLength(11, ErrorMessage = "Máximo de 11 caracteres")]
+        //[StringLength(11, ErrorMessage = "Máximo de 11 caracteres")]
         public string Cpf { get; set; }
 
         [Required(ErrorMessage = "Campo obrigatorio")]

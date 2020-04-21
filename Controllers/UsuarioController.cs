@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using Locar.AcessoDados.Interface;
 using Locar.Models;
 using Locar.Models.ViewModels;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -86,6 +89,49 @@ namespace Locar.Controllers
             _logger.LogInformation("Informações de usuario inválidas.");
             //Se não válido model
             return View(registro);
+        }
+
+        public async Task<IActionResult> Entrar()
+        {
+            if (User.Identity.IsAuthenticated)
+                await _usuarioRepositorio.EfetuarLogout();
+
+            _logger.LogInformation("Entrando na página de login...");
+
+            return View();
+        }
+
+        public async Task<IActionResult> Entrar(LoginViewModel loginParam)
+        {
+            if (ModelState.IsValid)
+            {
+                _logger.LogInformation("Recebendo usuário por login...");
+               
+                var usuario = await _usuarioRepositorio.PegarUsuarioPorEmail(loginParam.Email);
+
+                PasswordHasher<Usuario> passwordHasher = new PasswordHasher<Usuario>();
+
+                if(usuario != null)
+                {
+                    _logger.LogInformation("Carregando informações de usuário...");
+
+                    if (passwordHasher.VerifyHashedPassword(usuario, usuario.PasswordHash, loginParam.Password) != PasswordVerificationResult.Failed)
+                    {
+                        _logger.LogInformation("Informações corretas...");
+                        await _usuarioRepositorio.EfetuarLogin(usuario, false);
+
+                        return RedirectToAction("Index", "Home");
+                    }
+
+                    _logger.LogInformation("Login inválido...");
+                    ModelState.AddModelError("", "Email ou senha inválidos...");
+                }
+
+                _logger.LogInformation("Login inválido...");
+                ModelState.AddModelError("", "Email ou senha inválidos...");
+            }
+
+            return View(loginParam);
         }
     }
 }
