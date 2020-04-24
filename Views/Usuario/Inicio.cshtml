@@ -1,0 +1,116 @@
+﻿@model Locar.Models.Usuario
+@{
+    ViewData["Title"] = "Informaçoes de usuário";
+}
+
+<div class="dados">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="titulo">
+                <i class="fas fa-address-card fa-lg"></i>&nbsp; Meus dados &nbsp;
+                <a asp-action="Atualizar"
+                   asp-controller="Usuario"
+                   asp-route-UsuarioId="@Model.Id"
+                   class="btn btn-outline-secondary"
+                   data-toggle="tooltip" data-placement="right" title="Atualizar dados"><i class="fas fa-edit fa-lg"></i></a>
+            </h3>
+        </div>
+        <div class="card-body">
+            <div class="input-group col-8 campos">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-signature fa-lg"></i></span>
+                </div>
+                <input asp-for="Nome" type="text" class="form-control form-control-lg" readonly />
+            </div>
+
+            <div class="input-group col-8 campos">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-address-card fa-lg"></i></span>
+                </div>
+                <input asp-for="Cpf" type="text" class="form-control form-control-lg" readonly />
+            </div>
+            <div class="input-group col-8 campos">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fas fa-phone-square fa-lg"></i></span>
+                </div>
+                <input asp-for="Telefone" type="text" class="form-control form-control-lg" />
+            </div>
+            <div class="input-group col-8 campos">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="far fa-envelope fa-lg"></i></span>
+                </div>
+                <input asp-for="Email" type="text" class="form-control form-control-lg" />
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Divisao -->
+<div class="enderecos">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="titulo">
+                <i class="fas fa-home fa-lg"></i>&nbsp; Meus Endereços &nbsp;
+                <a asp-action="Criar"
+                   asp-controller="Endereco"
+                   class="btn btn-outline-secondary"
+                   data-toggle="tooltip" data-placement="right" 
+                   title="Novo endereço"><i class="fas fa-plus-circle fa-lg"></i></a>
+            </h3>
+        </div>
+        <div class="card-body">
+            @*@await Component.InvokeAsync("Endereco");*@
+        </div>
+    </div>
+</div>
+<!-- Divisao -->
+<div class="carros">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="titulo">
+                <i class="fas fa-car fa-lg"></i>&nbsp; Meus carros alugados &nbsp;
+            </h3>
+        </div>
+        <div class="card-body">
+            @*@await Component.InvokeAsync("CarrosAlugados");*@
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+
+        /*function ExibirModal() {
+            $('[data-toggle="tooltip"]').tooltip();
+        }*/
+        $(function() {
+            $('[data-toggle="tooltip"]').tooltip();
+        })
+
+
+        function ConfirmarExclusao(id, nome, controller) {
+            $(".Nome").html(nome);
+
+            $(".modal").modal("show");
+
+            $(".btnExcluir").on("click", function () {
+                var url = "/" + controller + "/Delete/";
+
+                console.log("Clique em excluir");
+
+                $.ajax({
+                    method: "POST",
+                    url: url,
+                    data: {id:id },
+                    success: function(data){
+                        alert("Registro Excluido");
+
+                       // $(".modal").modal('hide');
+                        location.reload();
+                    }
+                });
+            });
+
+        }
+
+    </script>
+}

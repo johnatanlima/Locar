@@ -23,6 +23,14 @@ namespace Locar.Controllers
             _logger = logger;
         }
 
+        public  async Task<IActionResult> Inicio()
+        {
+            _logger.LogInformation("Tela inicial de usuários...");
+
+            return View(await _usuarioRepositorio.PegarUsuarioLogado(User));
+        }
+
+
         [HttpGet]
         public async Task<IActionResult> Registrar()
         {
@@ -70,7 +78,7 @@ namespace Locar.Controllers
                     await _usuarioRepositorio.EfetuarLogin(usuario, false);
                         _logger.LogInformation("Novo usuario logado com sucesso...");
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Inicio", "Usuario");
 
                 }
                 else
@@ -122,7 +130,7 @@ namespace Locar.Controllers
                         _logger.LogInformation("Informações corretas...");
                         await _usuarioRepositorio.EfetuarLogin(usuario, false);
 
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Inicio", "Usuario");
                     }
 
                     _logger.LogInformation("Login inválido...");
@@ -134,6 +142,13 @@ namespace Locar.Controllers
             }
 
             return View(loginParam);
+        }
+
+        public async Task<IActionResult> Sair()
+        {
+            await _usuarioRepositorio.EfetuarLogout();
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }
