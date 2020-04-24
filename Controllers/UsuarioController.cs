@@ -101,6 +101,8 @@ namespace Locar.Controllers
             return View();
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Entrar(LoginViewModel loginParam)
         {
             if (ModelState.IsValid)
