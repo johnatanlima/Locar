@@ -50,7 +50,7 @@
         <div class="card-header">
             <h3 class="titulo">
                 <i class="fas fa-home fa-lg"></i>&nbsp; Meus Endereços &nbsp;
-                <a asp-action="Criar"
+                <a asp-action="CriarEndereco"
                    asp-controller="Endereco"
                    class="btn btn-outline-secondary"
                    data-toggle="tooltip" data-placement="right" 
@@ -58,7 +58,7 @@
             </h3>
         </div>
         <div class="card-body">
-            @*@await Component.InvokeAsync("Endereco");*@
+            @await Component.InvokeAsync("Endereco")
         </div>
     </div>
 </div>

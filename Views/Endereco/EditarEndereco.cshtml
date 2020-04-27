@@ -4,56 +4,6 @@
     ViewData["Title"] = "Atualiar endereço" + Model.Rua;
 }
 
-<h1>Edit</h1>
-
-<h4>Endereco</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="EnderecoId" />
-            <div class="form-group">
-                <label asp-for="Estado" class="control-label"></label>
-                <input asp-for="Estado" class="form-control" />
-                <span asp-validation-for="Estado" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Cidade" class="control-label"></label>
-                <input asp-for="Cidade" class="form-control" />
-                <span asp-validation-for="Cidade" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Bairro" class="control-label"></label>
-                <input asp-for="Bairro" class="form-control" />
-                <span asp-validation-for="Bairro" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Rua" class="control-label"></label>
-                <input asp-for="Rua" class="form-control" />
-                <span asp-validation-for="Rua" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Numero" class="control-label"></label>
-                <input asp-for="Numero" class="form-control" />
-                <span asp-validation-for="Numero" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="UsuarioId" class="control-label"></label>
-                <select asp-for="UsuarioId" class="form-control" asp-items="ViewBag.UsuarioId"></select>
-                <span asp-validation-for="UsuarioId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @*Divisao*@
 
 <div class="border border-light rounded shadow col-md-8">
@@ -102,7 +52,7 @@
                     <div class="campos">
                         <div class="form-group">
                             <label asp-for="Numero" class="control-label"></label>
-                            <input asp-for="Numero" class="form-control form-control-lg" />
+                            <input asp-for="Numero" type="number" class="form-control form-control-lg" />
                             <span asp-validation-for="Numero" class="text-danger"></span>
                         </div>
                     </div>
@@ -112,7 +62,7 @@
 
                     <div class="form-group botoes">
                         <input type="submit" value="Salvar" class="btn btn-outline-info btn-lg" /> &nbsp;
-                        <a asp-action="Inicio" asp-controller="Usuario" class="btn btn-link btn-lg"> Voltar </a>
+                        <a asp-action="EditarEndereco" asp-controller="Endereco" class="btn btn-link btn-lg"> Voltar </a>
                     </div>
                 </form>
             </div>

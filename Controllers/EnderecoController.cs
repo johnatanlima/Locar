@@ -17,9 +17,9 @@ namespace Locar.Controllers
         //private readonly LocarDbContext _contexto;
         private readonly IUsuarioRepositorio _usuarioRepositorio;
         private readonly IEnderecoRepositorio _enderecoRepositorio;
-        private readonly ILogger _logger;
+        private readonly ILogger<EnderecoController> _logger;
 
-        public EnderecoController(IUsuarioRepositorio usuarioRepositorio, IEnderecoRepositorio enderecoRepositorio, ILogger logger)
+        public EnderecoController(IUsuarioRepositorio usuarioRepositorio, IEnderecoRepositorio enderecoRepositorio, ILogger<EnderecoController> logger)
         {
             _enderecoRepositorio = enderecoRepositorio;
             _usuarioRepositorio = usuarioRepositorio;
@@ -99,6 +99,7 @@ namespace Locar.Controllers
         public async Task<IActionResult> DeletarEndereco(int id)
         {
             await _enderecoRepositorio.Excluir(id);
+            _logger.LogInformation("Endereço Excluido...");
 
             return Json("Endereço Excluido....");
         }
