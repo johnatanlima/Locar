@@ -76,6 +76,8 @@
     </div>
 </div>
 
+<partial name="_ModalExclusao" />
+
 @section Scripts{
     <script>
 
@@ -93,7 +95,7 @@
             $(".modal").modal("show");
 
             $(".btnExcluir").on("click", function () {
-                var url = "/" + controller + "/Delete/";
+                var url = "/" + controller + "/DeletarEndereco/";
 
                 console.log("Clique em excluir");
 

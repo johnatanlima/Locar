@@ -13,7 +13,7 @@
         <hr />
         <div class="row">
             <div class="col-md-8">
-                <form asp-action="CriarEndereco">
+                <form asp-action="EditarEndereco">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                     <input type="hidden" asp-for="EnderecoId" />
 
@@ -62,7 +62,7 @@
 
                     <div class="form-group botoes">
                         <input type="submit" value="Salvar" class="btn btn-outline-info btn-lg" /> &nbsp;
-                        <a asp-action="EditarEndereco" asp-controller="Endereco" class="btn btn-link btn-lg"> Voltar </a>
+                        <a asp-action="Inicio" asp-controller="Usuario" class="btn btn-link btn-lg"> Voltar </a>
                     </div>
                 </form>
             </div>

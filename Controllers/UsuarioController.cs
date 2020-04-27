@@ -23,11 +23,15 @@ namespace Locar.Controllers
             _logger = logger;
         }
 
-        public  async Task<IActionResult> Inicio()
+        public async Task<IActionResult> Inicio()
         {
             _logger.LogInformation("Tela inicial de usuários...");
+            if (User.Identity.IsAuthenticated)
+            {
+                return View(await _usuarioRepositorio.PegarUsuarioLogado(User));
+            }
 
-            return View(await _usuarioRepositorio.PegarUsuarioLogado(User));
+            return RedirectToAction("Entrar");
         }
 
 

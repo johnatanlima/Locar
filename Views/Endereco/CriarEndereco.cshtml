@@ -13,7 +13,7 @@
             <div class="col-md-8">
                 <form asp-action="CriarEndereco">
                     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
+                    <input asp-for="UsuarioId" type="hidden" />
                     <div class="campos">
                         <div class="form-group">
                             <label asp-for="Estado" class="control-label"></label>
@@ -53,9 +53,6 @@
                             <span asp-validation-for="Numero" class="text-danger"></span>
                         </div>
                     </div>
-
-                    <input asp-for="UsuarioId" type="hidden" />
-
 
                     <div class="form-group botoes">
                         <input type="submit" value="Salvar" class="btn btn-outline-success btn-lg" /> &nbsp;
