@@ -95,14 +95,14 @@ namespace Locar.Controllers
             return View(conta);
         }
 
-        [HttpPost]
-        public async Task<JsonResult> Delete(int id)
-        {
+        //[HttpPost]
+        //public async Task<JsonResult> Delete(int id)
+        //{
 
-            await _contaRepositorio.Excluir(id);
+        //    await _contaRepositorio.Excluir(id);
 
-            return Json("Conta excluída...");
-        }
+        //    return Json("Conta excluída...");
+        //}
 
     }
 }
