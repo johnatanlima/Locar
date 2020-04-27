@@ -65,6 +65,7 @@ namespace Locar
             services.AddScoped<INivelAcesso, NivelAcessoRepositorio>();
             services.AddScoped<IUsuarioRepositorio, UsuarioRepositorio>();
             services.AddScoped<IEnderecoRepositorio, EnderecoRepositorio>();
+            services.AddScoped<IContaRepositorio, ContaRepositorio>();
 
 
             //Por causa das DI que foram feitas no controller Home
