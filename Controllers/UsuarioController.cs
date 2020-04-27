@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -8,6 +9,7 @@ using Locar.Models;
 using Locar.Models.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.Extensions.Logging;
 
 namespace Locar.Controllers
@@ -153,6 +155,53 @@ namespace Locar.Controllers
             await _usuarioRepositorio.EfetuarLogout();
 
             return RedirectToAction("Index", "Home");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> AtualizarUsuario(string usuarioId)
+        {
+            _logger.LogInformation("Verificando se usuario existe...");
+
+            var usuario = await _usuarioRepositorio.PegarPeloId(usuarioId);
+
+            var usuarioVM = new AtualizarUsuarioViewModel
+            {
+                Id = usuario.Id,
+                Nome = usuario.Nome,
+                Cpf = usuario.Cpf,
+                Telefone = usuario.Telefone,
+                Email = usuario.Email,
+                NomeUsuario = usuario.UserName
+            };
+
+            _logger.LogInformation("Atualizando usuario");
+
+            return View(usuarioVM);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AtualizarUsuario(AtualizarUsuarioViewModel usuarioVM)
+        {
+            if (ModelState.IsValid)
+            {
+                var usuario = await _usuarioRepositorio.PegarPeloId(usuarioVM.Id);
+
+                usuario.Nome = usuarioVM.Nome;
+                usuario.Cpf = usuarioVM.Cpf;
+                usuario.Telefone = usuarioVM.Telefone;
+                usuario.Email = usuarioVM.Email;
+                usuario.UserName = usuarioVM.NomeUsuario;
+
+                await _usuarioRepositorio.AtualizarUsuario(usuario);
+                _logger.LogInformation("Atualizando usuario...");
+
+                return RedirectToAction("Inicio");
+            }
+
+            _logger.LogError("Deu ruim pra recuperar o usuário..");
+
+            return View(usuarioVM);
         }
     }
 }

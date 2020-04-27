@@ -9,6 +9,8 @@ namespace Locar.Models.ViewModels
 {
     public class AtualizarUsuarioViewModel
     {
+        public string Id { get; set; }
+
         [Required(ErrorMessage ="Campo obrigatório")]
         [StringLength(45, ErrorMessage ="Máx de 45 caracteres")]
         public string Nome { get; set; }
