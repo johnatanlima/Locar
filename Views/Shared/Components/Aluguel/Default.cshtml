@@ -1,0 +1,24 @@
+﻿@model Locar.Models.Carro
+
+<div class="jumbotron">
+    <div class="row">
+        <div class="col-6">
+            <img src="@Url.Content(Model.Foto)" class="card-img img-fluid" height="300" width="300" />
+        </div>
+
+        <div class="col-6">
+            <div class="col-4">
+                <h3 class="titulo row"> <strong> Marca: </strong> @Model.Marca</h3>
+            </div>
+            <div class="col-4">
+                <h3 class="titulo row"> <strong> Nome: </strong> @Model.Nome</h3>
+            </div>
+            <div class="col-4">
+                <h3 class="titulo row"> <strong> Preço Diária: </strong> R$ @Model.PrecoDiaria,00</h3> 
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
