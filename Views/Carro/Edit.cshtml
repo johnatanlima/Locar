@@ -1,46 +1,92 @@
 ﻿@model Locar.Models.Carro
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Atualizar carro " + Model.Nome ;
 }
 
-<h1>Edit</h1>
+<div class="border border-light rounded shadow col-md-8">
+    <div class="container">
 
-<h4>Carro</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="CarroId" />
-            <div class="form-group">
-                <label asp-for="Nome" class="control-label"></label>
-                <input asp-for="Nome" class="form-control" />
-                <span asp-validation-for="Nome" class="text-danger"></span>
+        <h3 class="titulo"><i class="fas fa-car fa-lg"></i> Editar carro @Model.Nome </h3>
+        <hr />
+        <div class="row">
+            <div class="col-md-8">
+                <form asp-action="Edit" enctype="multipart/form-data">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <input type="hidden" asp-for="CarroId" />
+ 
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="campos">
+                                <div class="form-group">
+                                    <label asp-for="Nome" class="control-label"></label>
+                                    <input asp-for="Nome" class="form-control form-control-lg" />
+                                    <span asp-validation-for="Nome" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="campos">
+                                <div class="form-group">
+                                    <label asp-for="Marca" class="control-label"></label>
+                                    <input asp-for="Marca" class="form-control form-control-lg" />
+                                    <span asp-validation-for="Marca" class="text-danger"></span>
+                                </div>
+                            </div>
+
+                            <div class="campos">
+                                <div class="form-group">
+                                    <label asp-for="PrecoDiaria" class="control-label"></label>
+                                    <input asp-for="PrecoDiaria" class="form-control form-control-lg" />
+                                    <span asp-validation-for="PrecoDiaria" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="form-group campos">
+                                @if (Model.Foto != null)
+                                {
+                                    <img src="@Url.Content(Model.Foto)" name="arquivo" id="arquivo" height="300" width="300" class="border border-secondary rounded" />
+                                }
+                                else
+                                {
+                                    <img src="#" name="arquivo" id="arquivo" height="300" width="300" class="border border-secondary rounded" />
+                                }
+                            </div>
+                            
+                            <div class="campos">
+                                <div class="form-group">
+                                    <label asp-for="Foto" class="control-label"></label>
+                                    <input asp-for="Foto" type="file" class="form-control-file form-control-lg" id="arquivo"
+                                           name="arquivo" onchange="CarregarImagem(this)" />
+                                    <span asp-validation-for="Foto" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                       
+                    </div>
+                    <div class="form-group botoes">
+                        <input type="submit" value="Editar" class="btn btn-outline-info btn-lg" /> &nbsp;
+                        <a asp-action="Index" class="btn btn-link btn-lg"> Voltar </a>
+                    </div>
+                </form>
             </div>
-            <div class="form-group">
-                <label asp-for="Marca" class="control-label"></label>
-                <input asp-for="Marca" class="form-control" />
-                <span asp-validation-for="Marca" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Foto" class="control-label"></label>
-                <input asp-for="Foto" class="form-control" />
-                <span asp-validation-for="Foto" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PrecoDiaria" class="control-label"></label>
-                <input asp-for="PrecoDiaria" class="form-control" />
-                <span asp-validation-for="PrecoDiaria" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
+    <script>
+        function CarregarImagem(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $("#arquivo").attr('src', e.target.result).width(300).height(300);
+                }
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    </script>
+}

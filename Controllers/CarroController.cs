@@ -41,21 +41,21 @@ namespace Locar.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CarroId,Nome,Marca,Foto,PrecoDiaria")] Carro carro, IFormFile arq)
+        public async Task<IActionResult> Create([Bind("CarroId,Nome,Marca,Foto,PrecoDiaria")] Carro carro, IFormFile arquivo)
         {
             if (ModelState.IsValid)
             {
-                if(arq != null)
+                if(arquivo != null)
                 {
                     var linkUpload = Path.Combine(_hostingEnv.WebRootPath, "Imagens");
 
-                    using(FileStream fileStream = new FileStream(Path.Combine(linkUpload, arq.FileName), FileMode.Create))
+                    using(FileStream fileStream = new FileStream(Path.Combine(linkUpload, arquivo.FileName), FileMode.Create))
                     {
                         _logger.LogInformation("Tentando criar o arquivo para foto...");
 
-                        await arq.CopyToAsync(fileStream);
+                        await arquivo.CopyToAsync(fileStream);
 
-                        carro.Foto = "~/Imagens/" + arq.FileName;
+                        carro.Foto = "~/Imagens/" + arquivo.FileName;
                     }
                 }
 
@@ -81,7 +81,7 @@ namespace Locar.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CarroId,Nome,Marca,Foto,PrecoDiaria")] Carro carro, IFormFile arq)
+        public async Task<IActionResult> Edit(int id, [Bind("CarroId,Nome,Marca,Foto,PrecoDiaria")] Carro carro, IFormFile arquivo)
         {
             if (id != carro.CarroId)
             {
@@ -90,26 +90,26 @@ namespace Locar.Controllers
 
             if (ModelState.IsValid)
             {
-                if (arq != null)
+                if (arquivo != null)
                 {
                     var linkUpload = Path.Combine(_hostingEnv.WebRootPath, "Imagens");
 
-                    using (FileStream fileStream = new FileStream(Path.Combine(linkUpload, arq.FileName), FileMode.Create))
+                    using (FileStream fileStream = new FileStream(Path.Combine(linkUpload, arquivo.FileName), FileMode.Create))
                     {
                         _logger.LogInformation("Tentando criar o arquivo para foto...");
 
-                        await arq.CopyToAsync(fileStream);
+                        await arquivo.CopyToAsync(fileStream);
 
-                        carro.Foto = "~/Imagens/" + arq.FileName;
+                        carro.Foto = "~/Imagens/" + arquivo.FileName;
                     }
+                    return RedirectToAction("Index");
                 }
-
-                else
+                else 
                     carro.Foto = TempData["FotoCarro"].ToString();
                 
                 await _carroRepositorio.Atualizar(carro);
 
-                RedirectToAction(nameof(Index));                   
+                return RedirectToAction("Index");                   
             }
                        
             return View(carro);
