@@ -99,7 +99,7 @@ namespace Locar.Controllers
                         _logger.LogInformation("Tentando criar o arquivo para foto...");
 
                         await arquivo.CopyToAsync(fileStream);
-
+                         
                         carro.Foto = "~/Imagens/" + arquivo.FileName;
                     }
                     return RedirectToAction("Index");
