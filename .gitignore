@@ -18,7 +18,9 @@ appsettings.json
 appsettings.json/
 /appsetting.json
 *appsetting.json
-C:\Users\johw2\Desktop\Workspace .NET Core\Locar\appsettings.json
+appsettings.json
+appsettingsBackup.json
+
 # Build results
 [Dd]ebug/
 [Dd]ebugPublic/
