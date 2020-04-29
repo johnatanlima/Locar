@@ -1,0 +1,22 @@
+﻿@model IEnumerable<Locar.Models.Aluguel>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-4">
+            <div class="cartoes">
+                <div class="card">
+                    <img src="@Url.Content(item.CarroVirtual.Foto)" class="card-img-top img-fluid" />
+                    <div class="card-body">
+                        <h5 class="card-title">@item.CarroVirtual.Marca - @item.CarroVirtual.Nome </h5>
+                        
+                        <h5>@item.Inicio - @item.Fim</h5>
+                        
+                        <h5><span class="badge badge-success"> R$ @item.PrecoTotal,00</span></h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+     }
+
+</div>
