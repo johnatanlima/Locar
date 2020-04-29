@@ -12,5 +12,7 @@ namespace Locar.AcessoDados.Interface
         new Task<IEnumerable<Conta>> PegarTodos();
 
         int PegarSaldoPeloId(string id);
+
+        Task<Conta> PegarSaldoPeloUsuarioId(string id);
     }
 }

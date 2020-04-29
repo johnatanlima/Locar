@@ -76,7 +76,7 @@ namespace Locar.Controllers
 
                     await _aluguelRepositorio.Inserir(aluguel);
 
-                    var saldoUsuario = await _contaRepositorio.PegarPeloId(usuario.Id);
+                    var saldoUsuario = await _contaRepositorio.PegarSaldoPeloUsuarioId(usuario.Id);
                     saldoUsuario.Saldo = saldoUsuario.Saldo - aluguelViewModel.PrecoTotal;
                     await _contaRepositorio.Atualizar(saldoUsuario);
                     

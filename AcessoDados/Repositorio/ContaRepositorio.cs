@@ -28,5 +28,10 @@ namespace Locar.AcessoDados.Repositorio
         {
             return await _contexto.Contas.Include(c => c.UsuarioVirtual).ToListAsync();
         }
+
+        public async Task<Conta> PegarSaldoPeloUsuarioId(string id)
+        {
+            return await _contexto.Contas.FirstOrDefaultAsync(c => c.UsuarioId == id);
+        }
     }
 }

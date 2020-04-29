@@ -12,7 +12,7 @@
         <h3 class="titulo"><i class="fas fa-car fa-lg"></i> Aluguel de veículos </h3>
         <hr />
 
-        @if(TempData["Aviso"] != null)
+        @if (TempData["Aviso"] != null)
         {
             <p class="alert alert-warning"> @TempData["Aviso"].ToString() </p>
         }
@@ -27,7 +27,7 @@
                     <div class="campos">
                         <div class="form-group">
                             <label asp-for="Inicio" class="control-label"> Saldo </label>
-                            <input asp-for="Inicio" class="form-control form-control-lg datepicker" />
+                            <input asp-for="Inicio" id="Inicio" class="form-control form-control-lg datepicker" />
                             <span asp-validation-for="Inicio" class="text-danger"></span>
                         </div>
                     </div>
@@ -35,7 +35,7 @@
                     <div class="campos">
                         <div class="form-group">
                             <label asp-for="Fim" class="control-label"> Saldo </label>
-                            <input asp-for="Fim" class="form-control form-control-lg datepicker" />
+                            <input asp-for="Fim" id="Fim" class="form-control form-control-lg datepicker" />
                             <span asp-validation-for="Fim" class="text-danger"></span>
                         </div>
                     </div>
@@ -43,7 +43,7 @@
                     <div class="campos">
                         <div class="form-group">
                             <label asp-for="PrecoDiaria" class="control-label"> Saldo </label>
-                            <input asp-for="PrecoDiaria" class="form-control form-control-lg precoDiaria" readonly />
+                            <input asp-for="PrecoDiaria" class="form-control form-control-lg" id="precoDiaria" readonly />
                             <span asp-validation-for="PrecoDiaria" class="text-danger"></span>
                         </div>
                     </div>
@@ -51,7 +51,7 @@
                     <div class="campos">
                         <div class="form-group">
                             <label asp-for="PrecoTotal" class="control-label"> Saldo </label>
-                            <input asp-for="PrecoTotal" class="form-control form-control-lg precoTotal" readonly />
+                            <input asp-for="PrecoTotal" class="form-control form-control-lg" id="precoTotal" readonly />
                             <span asp-validation-for="PrecoTotal" class="text-danger"></span>
                         </div>
                     </div>
@@ -68,6 +68,60 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        $(".datepicker").datepicker({
+            autoclose: true,
+            calendarWeeks: true,
+            clearBtn: true,
+            todayBtn: true,
+            todayHighlight: true,
+            format: "dd/mm/yyyy",
+            language: "pt-BR"
+        })
+
+        $("#Inicio").on('change', function () {
+
+            if ( ($("#Inicio").val() !== "" && $("#Inicio").val() !== undefined) &&
+                ($("#Fim").val() !== "" && $("#Fim").val() !== undefined) ) {
+
+                var i = $("#Inicio").val().split("/");
+                    var inicio = new Date(i[2], i[1], i[0]);
+
+                var f = $("#Fim").val().split("/");
+                    var fim = new Date(f[2], f[1], f[0]);
+
+                var dias = ((fim - inicio) / 86400) / 1000;
+
+                var precoDiaria = parseInt( $("#precoDiaria").val() );
+
+                var precoTotal = precoDiaria * dias;
+
+                $("#precoTotal").val(precoTotal);
+            }
+        });
+
+        $("#Fim").on('change', function () {
+            if (($("#Inicio").val() !== "" && $("#Inicio").val() !== undefined) &&
+                ( $("#Fim").val() !== "" && $("#Fim").val() !== undefined) ) {
+
+                var i = $("#Inicio").val().split("/");
+                    var inicio = new Date(i[2], i[1], i[0]);
+
+                var f = $("#Fim").val().split("/");
+                    var fim = new Date(f[2], f[1], f[0]);
+
+                var dias = ( (fim - inicio) / 86400) / 1000;
+
+                var precoDiaria = parseInt($("#precoDiaria").val());
+
+                var precoTotal = precoDiaria * dias;
+
+                $("#precoTotal").val(precoTotal);
+            }
+        });
+
+    </script>
 }
 
 

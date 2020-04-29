@@ -31,7 +31,7 @@
                         <a class="btn btn-outline-danger btn-lg"
                            onclick="ConfirmarExclusao(@item.CarroId, '@item.Nome', '@controller')"> Excluir</a>
 
-                        <a asp-action="Alugar" asp-controller="AluguelCarro" asp-route-CarroId="@item.CarroId"
+                        <a asp-action="AluguelCarro" asp-controller="Aluguel" asp-route-CarroId="@item.CarroId"
                            asp-route-PrecoDiaria="@item.PrecoDiaria"
                            class="btn btn-outline-info btn-block"> Alugar Veículo</a>
                     </div>
