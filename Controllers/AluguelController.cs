@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Locar.AcessoDados.Interface;
 using Locar.Models;
 using Locar.Models.ViewModels;
+using Locar.Servicos;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -16,18 +17,21 @@ namespace Locar.Controllers
         private readonly IContaRepositorio _contaRepositorio;
         private readonly IAluguelRepositorio _aluguelRepositorio;
         private readonly ILogger<AluguelController> _logger;
+        private readonly IEmail _emailInterface;
 
         public AluguelController
             (IUsuarioRepositorio usuarioRepositorio,
             IContaRepositorio contaRepositorio,
             IAluguelRepositorio aluguelRepositorio,
-            ILogger<AluguelController> logger)
+            ILogger<AluguelController> logger, 
+            IEmail emailInterface)
         {
 
             _usuarioRepositorio = usuarioRepositorio;
             _contaRepositorio = contaRepositorio;
             _aluguelRepositorio = aluguelRepositorio;
             _logger = logger;
+            _emailInterface = emailInterface;
         }
 
         public IActionResult AluguelCarro(int carroId, int precoDiaria)
@@ -73,6 +77,12 @@ namespace Locar.Controllers
                         Fim = aluguelViewModel.Fim,
                         PrecoTotal = aluguelViewModel.PrecoTotal
                     };
+
+                    string assunto = "Reserva concluida com sucesso";
+                    string mensagem = string.Format("Veiculo em aguardo. Voce pode pegá-lo dia {0}" +
+                        " e deverá devolver dia {1}. O preco será R${2},00. Divirta-se", aluguel.Inicio, aluguel.Fim, aluguel.PrecoTotal);
+
+                    await _emailInterface.EnviarEmail(usuario.Email, assunto, mensagem);
 
                     await _aluguelRepositorio.Inserir(aluguel);
 

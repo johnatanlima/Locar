@@ -12,6 +12,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Locar.Models;
 using Locar.AcessoDados.Repositorio;
 using Locar.AcessoDados.Interface;
+using Locar.Servicos;
 
 namespace Locar
 {
@@ -68,6 +69,9 @@ namespace Locar
             services.AddScoped<IContaRepositorio, ContaRepositorio>();
             services.AddScoped<ICarroRepositorio, CarroRepositorio>();
             services.AddScoped<IAluguelRepositorio, AluguelRepositorio>();
+            services.Configure<ConfiguracaoEmail>(Configuration.GetSection("ConfiguracaoEmail"));
+
+            services.AddScoped<IEmail, EmailSender>();
 
             //Por causa das DI que foram feitas no controller Home
             //services.AddScoped<SignInManager<Usuario>,SignInManager<Usuario>>();
