@@ -36,11 +36,17 @@
             </button>
             
             <div class="collapse navbar-collapse bg-danger flex-flow space-between" id="navbarSupportedContent">
+                @if (!User.Identity.IsAuthenticated)
+                {
                 <a class="nav-link navbar-text text-white active item2" asp-action="Registrar" asp-controller="Usuario"> Registrar </a>
                 <a class="nav-link navbar-text text-white item2" asp-action="Entrar" asp-controller="Usuario"> Entrar</a>
-                <a class="nav-link navbar-text text-white item2" asp-action="Index" asp-controller="NivelAcesso"> Níveis de Acesso</a>
+                }
+                else(
                 <a class="nav-link navbar-text text-white item2" asp-action="Index" asp-controller="Carro"> Carros</a>
-                
+                );
+
+                <a class="nav-link navbar-text text-white item2" asp-action="Index" asp-controller="NivelAcesso"> Níveis de Acesso</a>
+
                 <a class="nav-link navbar-text text-white item2" asp-action="Index" asp-controller="Conta"> Saldo</a>
                 
                 <partial name="_LoginPartial" />
