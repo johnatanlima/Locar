@@ -6,11 +6,13 @@ using Locar.AcessoDados.Interface;
 using Locar.Models;
 using Locar.Models.ViewModels;
 using Locar.Servicos;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
 namespace Locar.Controllers
 {
+    [Authorize]
     public class AluguelController : Controller
     {
         private readonly IUsuarioRepositorio _usuarioRepositorio;

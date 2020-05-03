@@ -13,9 +13,11 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Remotion.Linq.Clauses.ResultOperators;
 using System.IO;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Locar.Controllers
 {
+    [Authorize]
     public class CarroController : Controller
     {
         private readonly ICarroRepositorio _carroRepositorio;

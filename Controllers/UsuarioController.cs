@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Locar.AcessoDados.Interface;
 using Locar.Models;
 using Locar.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -14,6 +15,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Locar.Controllers
 {
+    [Authorize]
     public class UsuarioController : Controller
     {
         private readonly IUsuarioRepositorio _usuarioRepositorio;
@@ -36,7 +38,7 @@ namespace Locar.Controllers
             return RedirectToAction("Entrar");
         }
 
-
+        [AllowAnonymous]
         [HttpGet]
         public async Task<IActionResult> Registrar()
         {
@@ -52,6 +54,7 @@ namespace Locar.Controllers
             return View("Registrar");
         }
 
+        [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Registrar(RegistroViewModel registro)
@@ -76,7 +79,7 @@ namespace Locar.Controllers
                     _logger.LogInformation("Registro feito com sucesso...");
                     _logger.LogInformation("Definindo nivel de acesso de novo usuario..");
 
-                    var nivelAcesso = "Cliente";
+                    var nivelAcesso = "Administrador";
                     await _usuarioRepositorio.AtribuirNivelAcesso(usuario, nivelAcesso);
                     _logger.LogInformation("Atribuicao ok..");
 
@@ -105,6 +108,7 @@ namespace Locar.Controllers
             return View(registro);
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> Entrar()
         {
             if (User.Identity.IsAuthenticated)
@@ -115,6 +119,7 @@ namespace Locar.Controllers
             return View();
         }
 
+        [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Entrar(LoginViewModel loginParam)

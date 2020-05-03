@@ -9,9 +9,11 @@ using Locar.Data;
 using Locar.Models;
 using Locar.AcessoDados.Interface;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Locar.Controllers
 {
+    [Authorize]
     public class EnderecoController : Controller
     {
         //private readonly LocarDbContext _contexto;
